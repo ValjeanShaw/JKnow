@@ -1,6 +1,7 @@
 package algorithm.digui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -49,5 +50,26 @@ public class YanghuiTriangle {
             allList.add(currentList);
             return allList;
         }
+    }
+
+
+    public List<Integer> getRow(int rowIndex) {
+        //递归结束条件
+        if(rowIndex == 0){
+            return new ArrayList<>(Arrays.asList(1));
+        }
+        if(rowIndex == 1){
+            return new ArrayList<>(Arrays.asList(1,1));
+        }
+        
+        //n 和 n-1 的关系
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        for(int i=1;i<rowIndex;i++){
+            List<Integer> lastList = getRow(rowIndex-1);
+            list.add(lastList.get(i-1)+lastList.get(i));
+        }
+        list.add(1);
+        return list;
     }
 }
