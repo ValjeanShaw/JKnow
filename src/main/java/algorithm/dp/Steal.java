@@ -19,7 +19,7 @@ public class Steal {
 
     public static void main(String[] args) {
         Steal steal = new Steal();
-        int[] nums = {2,1,1,2};
+        int[] nums = {2,1,1,2,3,4,3};
         System.out.println(steal.rob(nums));
     }
 
@@ -42,5 +42,32 @@ public class Steal {
             dp[i] = Math.max((nums[i-1] + dp[i-2]),dp[i-1]);
         }
         return dp[nums.length];
+    }
+
+    /**
+     * 在上一个动态规划上进行优化的方案
+     * @param nums
+     * @return
+     */
+    public int rob1(int[] nums){
+        if(nums == null || nums.length<=0){
+            return 0;
+        }
+
+        if(nums.length ==1){
+            return nums[0];
+        }
+
+        //不需要定义dp数组，每个元素只与dp[i-2]   dp[i-1] 有关，那么只需要记录这两条相关的即可
+        int low = 0;
+        int high = nums[0];
+        int current=0;
+
+        for(int i=2;i<=nums.length;i++){
+            current = Math.max((nums[i-1] + low),high);
+            low = high;
+            high = current;
+        }
+        return current;
     }
 }
