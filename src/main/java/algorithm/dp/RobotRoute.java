@@ -13,7 +13,9 @@ public class RobotRoute {
 
     public static void main(String[] args) {
         RobotRoute robotRoute = new RobotRoute();
-        System.out.println(robotRoute.uniquePaths(3,3));
+        System.out.println(robotRoute.uniquePaths(3,7));
+        System.out.println(robotRoute.uniquePaths1(3,7));
+        System.out.println(robotRoute.uniquePaths2(3,7));
     }
 
     public int uniquePaths(int m, int n) {
@@ -50,6 +52,71 @@ public class RobotRoute {
         }
 
         return dp[m-1][n-1];
+    }
+
+    /**
+     * 优化方案，在上文基础上，将dp二维数组的空间存储降到最低
+     * @param m
+     * @param n
+     * @return
+     */
+    public int uniquePaths1(int m, int n) {
+        //先考虑极值
+        if (m <= 0 || n <= 0) {
+            return 0;
+        }
+        //边界，始终为1
+        if(m==1 && n== 1){
+            return 1;
+        }
+
+        //按行计算，可以省略掉n-1行之外的行，因此可以将dp[m][n] 降低到 2个 dp[n]
+        //初始值  上一行和当前行
+        int[] dpLast = new int[n];
+        int[] dpNow = new int[n];
+        for(int i=0;i<n;i++){
+            dpLast[i] = 1;
+        }
+        dpNow[0] = 1;
+
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dpNow[j] = dpNow[j-1] + dpLast[j];
+                dpLast[j] = dpNow[j];
+            }
+        }
+        return dpNow[n-1];
+    }
+
+    /**
+     * 第二种优化方案
+     * @param m
+     * @param n
+     * @return
+     */
+    public int uniquePaths2(int m, int n){
+        //先考虑极值
+        if (m <= 0 || n <= 0) {
+            return 0;
+        }
+        //边界，始终为1
+        if(m==1 && n== 1){
+            return 1;
+        }
+
+        //只保留 up 和 left,按行缩减，只保留当前所在的行
+        int[] dp = new int[n];
+        for(int i=0;i<n;i++){
+            dp[i] = 1;
+        }
+
+        for (int i = 1; i < m; i++) {
+            for (int j = 1; j < n; j++) {
+                dp[j] = dp[j] + dp[j-1];
+            }
+        }
+        return dp[n-1];
     }
 
 }
