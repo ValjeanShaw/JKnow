@@ -19,6 +19,7 @@
 * Steal2
 * LengthOfLIS
 * LongestCommonSubsequence  经典双串
+* CoinChange      找硬币
 
 
 ## 各分类dp题型
