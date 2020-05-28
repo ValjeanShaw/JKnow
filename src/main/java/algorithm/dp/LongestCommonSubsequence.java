@@ -1,4 +1,4 @@
-package algorithm.dp.chapter1;
+package algorithm.dp;
 
 /**
  * 最经典双串
