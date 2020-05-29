@@ -41,17 +41,19 @@ public class CoinChange {
             return -1;
         }
 
-        int max = amount + 1;
-        int[] dp = new int[amount + 1];
-        Arrays.fill(dp, max);
-        dp[0] = 0;
-        for (int i = 1; i <= amount; i++) {
-            for (int j = 0; j < coins.length; j++) {
-                if (coins[j] <= i) {
-                    dp[i] = Math.min(dp[i], dp[i - coins[j]] + 1);
+        //定义dp数组 n表示总额为n时候，需要的钱
+        int[] dp = new int[amount+1];
+        //初始化，dp[0] = 0   其它 = Int.MaxValue
+        for(int i=1;i<=amount;i++){
+            dp[i] = amount+1;
+            for(int j=0;j<coins.length;j++){
+                if(i>=coins[j]){
+                    dp[i] = Math.min(dp[i],dp[i-coins[j]] +1);
                 }
             }
         }
+
         return dp[amount] > amount ? -1 : dp[amount];
+
     }
 }
