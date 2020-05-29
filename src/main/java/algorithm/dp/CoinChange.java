@@ -1,7 +1,5 @@
 package algorithm.dp;
 
-import java.util.Arrays;
-
 /**
  *
  * https://leetcode-cn.com/problems/coin-change/
