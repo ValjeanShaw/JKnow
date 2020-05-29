@@ -31,21 +31,25 @@ public class LengthOfLIS {
             return 1;
         }
 
+        //dp数组，代表到第n个数字时 子序列长度
         int[] dp = new int[nums.length];
+        //初始化
         dp[0] = 1;
-        int maxans = 1;
-        for (int i = 1; i < dp.length; i++) {
-            //判断之前的数值是否小于当前数值
-            int maxval = 0;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    maxval = Math.max(maxval, dp[j]);
+        int maxValue = 1;
+        for(int i=0;i<dp.length;i++){
+            //找出比当前值小的最长序列长度
+            int maxCurrentValue = 0;
+            for(int j=0;j<i;i++){
+                if(nums[i]>nums[j]){
+                    maxCurrentValue = Math.max(maxCurrentValue,dp[j]);
                 }
             }
-            dp[i] = maxval + 1;
-            maxans = Math.max(maxans, dp[i]);
+            //之前的值都比现在小，所以这里要加上当前数值的1
+            dp[i] = maxCurrentValue +1;
+            //然后与全局比较，给全局最大值一个最大值
+            maxValue = Math.max(dp[i],maxValue);
         }
-        return maxans;
+        return maxValue;
     }
 
 }
