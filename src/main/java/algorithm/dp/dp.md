@@ -20,6 +20,7 @@
 * LengthOfLIS
 * LongestCommonSubsequence  经典双串
 * CoinChange      找硬币
+* Pack            0-1背包问题
 
 
 ## 各分类dp题型
