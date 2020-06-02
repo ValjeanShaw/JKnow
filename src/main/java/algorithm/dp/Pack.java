@@ -36,16 +36,15 @@ public class Pack {
         //状态转移方程
         for(int i=1;i<=n;i++){
             for(int j=1;j<=w;j++){
-                //判断当前的剩余容量，是否够装入背包
-                if(j-wt[i-1] < 0){
+                //先判断当前背包重量是否超了，如果超了，则一定不可选，那么选择没有这个背包的最佳状态
+                if(j<wt[i-1]){
                     dp[i][j] = dp[i-1][j];
                 }else{
-                    //装入或不装入背包，择优
-                    dp[i][j] = Math.max(dp[i-1][j-wt[i-1]]+ val[i-1],dp[i-1][j]);
+                    //选择这个和不选择这个的最佳状态
+                    dp[i][j] = Math.max(dp[i-1][j],dp[i-1][j-wt[i-1]] + val[i-1]);
                 }
             }
         }
         return dp[n][w];
-
     }
 }
