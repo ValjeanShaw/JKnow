@@ -36,8 +36,10 @@ public class CanPartition {
 
     public static void main(String[] args) {
         CanPartition canPartition = new CanPartition();
-//        System.out.println(canPartition.canPartition(new int[]{1, 5, 11, 5}));
+        System.out.println(canPartition.canPartition(new int[]{1, 5, 11, 5}));
         System.out.println(canPartition.canPartition(new int[]{1, 2,  5}));
+        System.out.println(canPartition.canPartition1(new int[]{1, 5, 11, 5}));
+        System.out.println(canPartition.canPartition1(new int[]{1, 2,  5}));
     }
 
     /**
@@ -85,5 +87,45 @@ public class CanPartition {
         }
 
         return dp[nums.length][sum/2];
+    }
+
+
+    /**
+     * 转换为0-1 背包问题   状态优化，将二维数组转换为一维数组，直接在原数组上操作
+     * @param nums
+     * @return
+     */
+    public boolean canPartition1(int[] nums) {
+        if(nums==null && nums.length==0){
+            return false;
+        }
+        //如果综合是奇数，那不可能拆分
+        int sum = 0;
+        for (int num : nums) {
+            sum+=num;
+        }
+        if(sum %2 ==1){
+            return false;
+        }
+
+        //转换为背包问题   dp[j]   当剩余总值是j，是否能凑对成功
+        boolean[] dp = new boolean[sum/2+1];
+
+        /**
+         * 初始化
+         * 剩余总值为0，那么说明饱和，为true
+         */
+        dp[0] = true;
+
+        //状态转换方程   唯⼀需要注意的是 j 应该从后往前反向遍历，因为每个物品（或者说数字）只能⽤⼀次，以免之前的结果影响其他的结果。
+        for(int i=1;i<=nums.length;i++){
+            for(int j=sum/2;j>0;j--){
+                if(j >= nums[i-1]){
+                    dp[j] = dp[j] || dp[j-nums[i-1]];
+                }
+            }
+        }
+
+        return dp[sum/2];
     }
 }
