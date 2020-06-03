@@ -24,6 +24,7 @@ public class Pack {
         int[] wt = new int[]{2, 1, 3};
         int[] val = new int[]{4, 2, 3};
         System.out.println(pack.maxValue(4,3,wt,val));
+        System.out.println(pack.maxValue1(4,3,wt,val));
     }
 
 
@@ -46,5 +47,32 @@ public class Pack {
             }
         }
         return dp[n][w];
+    }
+
+
+    /**
+     *  状态压缩，dp[i][n] 只与 dp[i-1][n]  有关系，可以简化空间
+     * @param w
+     * @param n
+     * @param wt
+     * @param val
+     * @return
+     */
+    public int maxValue1(int w,int n,int[] wt,int[] val){
+        //优化为一维数组  背包剩余可装重量为j，这种情况下可以装的最大价值，每行操作都在原数组上进行
+        int[] dp = new int[w+1];
+        //初始化数据    横纵坐标为0时，值都为0
+
+        //状态转移方程
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=w;j++){
+                //优化后，不满足条件的，直接取原值
+                if(j > wt[i-1]){
+                    dp[j] = Math.max(dp[j],dp[j-wt[i-1]]+val[i-1]);
+                }
+            }
+        }
+
+        return dp[w];
     }
 }
