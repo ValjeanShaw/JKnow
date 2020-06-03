@@ -36,8 +36,8 @@ public class CanPartition {
 
     public static void main(String[] args) {
         CanPartition canPartition = new CanPartition();
-        System.out.println(canPartition.canPartition(new int[]{1, 5, 11, 5}));
-        System.out.println(canPartition.canPartition(new int[]{1, 2, 3, 5}));
+//        System.out.println(canPartition.canPartition(new int[]{1, 5, 11, 5}));
+        System.out.println(canPartition.canPartition(new int[]{1, 2,  5}));
     }
 
     /**
@@ -62,12 +62,13 @@ public class CanPartition {
         //转换为背包问题   dp[i][j]   当选择第i个元素时，总值是j，是否能凑对成功
         boolean[][] dp = new boolean[nums.length+1][sum/2+1];
 
-        //初始化
+        /**
+         * 初始化
+         * base case 就是 dp[..][0] = true 和 dp[0][..] = false，
+         * 因为剩余总价值没有空间的时候，就相当于装满了，而当没有物品可选择的时候，肯定没办法装满背包。
+         */
         for(int i=0;i<nums.length;i++){
             dp[i][0] = true;
-        }
-        for(int j=0;j< sum/2;j++){
-            dp[0][j] = true;
         }
 
         //状态转换方程
