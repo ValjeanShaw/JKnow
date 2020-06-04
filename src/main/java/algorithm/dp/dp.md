@@ -19,9 +19,10 @@
 * Steal2
 * LengthOfLIS
 * LongestCommonSubsequence  经典双串
-* CoinChange      找硬币
+* CoinChange      找硬币  完全背包问题
 * Pack            0-1背包问题
 * CanPartition    0-1背包问题延伸
+* CoinChange2     完全背包问题
 
 
 ## 各分类dp题型
