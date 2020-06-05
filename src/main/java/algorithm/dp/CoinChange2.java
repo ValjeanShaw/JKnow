@@ -34,6 +34,12 @@ package algorithm.dp;
  */
 public class CoinChange2 {
 
+    public static void main(String[] args) {
+        CoinChange2 coinChange2 = new CoinChange2();
+        System.out.println(coinChange2.change(5,new int[]{1, 2, 5}));
+        System.out.println(coinChange2.change1(5,new int[]{1, 2, 5}));
+    }
+
     /**
      * 完全背包问题   即背包无限
      * @param amount
@@ -56,13 +62,38 @@ public class CoinChange2 {
                     //当前硬币不可选
                     dp[i][j] = dp[i-1][j];
                 }else{
-                    //当前硬币可选  那么当前硬币选上，选上后剩余的总数，再加上之前的硬币元素
+                    //当前硬币可选。那么总数应该是不选时的总数+ 选时的总数（选时的总数，是减掉该金额后的凑单总数，注意此处的i，应该是前i个可选硬币，而不是每个只能选一次）
                     dp[i][j] = dp[i-1][j] + dp[i][j-coins[i-1]];
                 }
             }
         }
 
         return dp[coins.length][amount];
+    }
+
+    /**
+     * 优化版本,将二维数组压缩至一维数组
+     *
+     * @param amount
+     * @param coins
+     * @return
+     */
+    public int change1(int amount, int[] coins) {
+        //代表价值为 n 时候，此时的凑单总数
+        int[] dp = new int[amount+1];
+
+        //初始化，当价值为0 时，就有一种凑单方法
+        dp[0] = 1;
+
+        for(int i=0;i<coins.length;i++){
+            for(int j=1;j<=amount;j++){
+                if(j>=coins[i]){
+                    dp[j] = dp[j] + dp[j-coins[i]];
+                }
+            }
+        }
+
+        return dp[amount];
     }
 
 }
