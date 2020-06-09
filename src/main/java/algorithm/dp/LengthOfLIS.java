@@ -46,10 +46,8 @@ public class LengthOfLIS {
             }
             //之前的值都比现在小，所以这里要加上当前数值的1
             dp[i] = maxCurrentValue +1;
-            //然后与全局比较，给全局最大值一个最大值
-            maxValue = Math.max(dp[i],maxValue);
         }
-        return maxValue;
+        return dp[nums.length-1];
     }
 
 }
