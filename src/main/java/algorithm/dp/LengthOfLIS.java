@@ -39,7 +39,7 @@ public class LengthOfLIS {
         for(int i=0;i<dp.length;i++){
             //找出比当前值小的最长序列长度
             int maxCurrentValue = 0;
-            for(int j=0;j<i;i++){
+            for(int j=0;j<i;j++){
                 if(nums[i]>nums[j]){
                     maxCurrentValue = Math.max(maxCurrentValue,dp[j]);
                 }
