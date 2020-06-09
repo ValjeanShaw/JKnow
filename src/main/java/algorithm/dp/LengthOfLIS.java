@@ -35,7 +35,6 @@ public class LengthOfLIS {
         int[] dp = new int[nums.length];
         //初始化
         dp[0] = 1;
-        int maxValue = 1;
         for(int i=0;i<dp.length;i++){
             //找出比当前值小的最长序列长度
             int maxCurrentValue = 0;
