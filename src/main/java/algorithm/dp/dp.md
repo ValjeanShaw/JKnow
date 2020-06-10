@@ -19,6 +19,7 @@
 * Steal2
 * LengthOfLIS
 * LongestCommonSubsequence  经典双串
+* LongestPalindromeSubseq   最长回文子序列
 * CoinChange      找硬币  完全背包问题
 * Pack            0-1背包问题
 * CanPartition    0-1背包问题延伸
