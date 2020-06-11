@@ -20,6 +20,7 @@
 * LengthOfLIS
 * LongestCommonSubsequence  经典双串
 * LongestPalindromeSubseq   最长回文子序列
+* MaxSubArray               连续子数组，注意区别，不一定最后就是最佳的
 * CoinChange      找硬币  完全背包问题
 * Pack            0-1背包问题
 * CanPartition    0-1背包问题延伸
