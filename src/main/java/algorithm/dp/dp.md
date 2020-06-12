@@ -26,6 +26,7 @@
 * CanPartition    0-1背包问题延伸
 * CoinChange2     完全背包问题
 * MaxProfit       股票买入问题
+* MaxProfit2      股票买入问题2
 
 
 ## 各分类dp题型
