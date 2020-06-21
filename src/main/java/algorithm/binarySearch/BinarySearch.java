@@ -46,13 +46,13 @@ public class BinarySearch {
     public int binarySearch(int[] nums,int target){
         int low = 0;
         int high = nums.length-1;
-        while(high > low){
+        while(high >= low){
             int mid = (low+high)/2;
             if(target == nums[mid]){
                 return mid;
             }
             if(nums[mid] > target){
-                high = mid;
+                high = mid-1;
             }
             if(nums[mid] < target){
                 low = mid +1;
