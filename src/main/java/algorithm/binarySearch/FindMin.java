@@ -10,6 +10,7 @@ public class FindMin {
         FindMin findMin = new FindMin();
         System.out.println(findMin.findMin(new int[]{4,5,6,7,0,1,2}));
         System.out.println(findMin.findMin1(new int[]{4,5,6,7,0,1,2}));
+        System.out.println(findMin.findMid2(new int[]{4,5,6,7,0,1,2}));
     }
 
     public int findMin(int[] nums) {
@@ -57,5 +58,23 @@ public class FindMin {
             }
         }
         return -1;
+    }
+
+    public int findMid2(int[] numbers){
+        int left =0;
+        int right = numbers.length-1;
+
+        while(left < right){
+            int mid = left + ((right-left)>>1);
+            if(numbers[mid]>numbers[right]){
+                left = mid +1;
+            }else if(numbers[mid]<numbers[right]){
+                right = mid;
+            }else{
+                right--;
+            }
+        }
+
+        return numbers[left];
     }
 }
